@@ -1,0 +1,27 @@
+// 这里定义滚动条的样式
+// .custom-scrollbar {
+// }
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+/*自定义滚动条的轨道*/
+::-webkit-scrollbar-track {
+	background-color: #FFFFFF;
+}
+/*自定义滚动条里面的小方块，能向上向下移动*/
+::-webkit-scrollbar-thumb {
+	background-color: #bddcfd;
+	border-radius: 5px;
+	border: 1px solid #bddcfd;
+}
+::-webkit-scrollbar-thumb:hover {
+	background-color: #b9d9fa;
+}
+::-webkit-scrollbar-thumb:active {
+	background-color: #b9d9fa;
+}
+/*边角，即两个滚动条的交汇处*/
+::-webkit-scrollbar-corner {
+	background-color: #FFFFFF;
+}

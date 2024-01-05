@@ -1,0 +1,33 @@
+@import './variables/variables.module.scss';
+// 引入公共样式
+@import './public/index.scss';
+// 添加mixins样式引入
+@import './mixins/mixins.scss';
+// 自定义修改插件样式
+@import './plugins/index.scss';
+
+html {
+	// font-size: 12px;
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+	// font-size: 12px;
+	font-weight: normal;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+#app {
+	height: 100%;
+}
+
+//main-container全局样式
+.app-container {
+	padding-top: 8px;
+	height: 100%;
+}

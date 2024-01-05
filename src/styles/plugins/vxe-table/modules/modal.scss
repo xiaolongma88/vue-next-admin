@@ -1,0 +1,17 @@
+// ----- 弹窗扩展自定义样式
+.rk-modal {
+	.vxe-modal--box {
+		border-radius: unset;
+	}
+	.vxe-modal--header {
+		overflow: hidden;
+		border-radius: unset;
+		.vxe-modal--header-title {
+			font-size: 18px;
+			font-weight: normal;
+		}
+		.vxe-modal--header-right {
+			padding: 0.8em 1em 0.6em 0;
+		}
+	}
+}

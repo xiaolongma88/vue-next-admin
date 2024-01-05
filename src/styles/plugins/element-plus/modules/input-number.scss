@@ -1,0 +1,13 @@
+// 将数字输入框的上下箭头隐藏
+.el-input-number {
+	.el-input-number__decrease,
+	.el-input-number__increase {
+		display: none;
+	}
+	.el-input__wrapper {
+		padding-right: 15px !important;
+	}
+	.el-input__inner {
+		text-align: right;
+	}
+}

@@ -1,0 +1,26 @@
+@use 'vxe-table/styles/variable.scss' as *;
+
+$common_border_color: #dadada;
+$common_table_header_bg_color: #dce4fb;
+$common_table_header_font_color: #606266;
+$common_table_row_hover_color: #e6f7ff;
+$common_table_page_active_color: var(--el-color-primary) !important;
+
+// ----- 修改样式变量
+$vxe-font-size: 14px;
+$vxe-font-color: #666;
+$vxe-primary-color: var(--el-color-primary) !important;
+$vxe-table-font-color: $vxe-font-color;
+$vxe-table-border-color: $common_border_color;
+$vxe-table-border-radius: 4px;
+
+// ----- vxe-grid变量
+$vxe-table-header-font-color: $common_table_header_font_color;
+$vxe-table-header-background-color: $common_table_header_bg_color;
+$vxe-table-footer-background-color: $common_table_header_bg_color;
+$vxe-table-footer-font-color: $common_table_header_font_color;
+
+// ----- modal样式
+$vxe-modal-header-background-color: #e3f2fe;
+
+@import 'vxe-table/styles/all.scss';
