@@ -6,6 +6,9 @@ import { useLoginApi } from '@/api/login';
 import { useThemeConfig } from '@/stores/themeConfig.js';
 import { AuthUtils, Session } from '@/utils';
 
+
+
+
 const { getUserInfo } = useUserApi();
 const { login, logout } = useLoginApi();
 
@@ -32,12 +35,13 @@ export const useUserStore = defineStore('user', {
 			return new Promise((resolve, reject) => {
 				login(userCode, password)
 					.then((res) => {
-						const { code, data, msg } = res;
-						if (code === 200) {
+						const { status, data, msg } = res;
+						if (status === 200) {
 							const { Authorization } = data;
 							Session.set('token', Authorization);
 							AuthUtils.accessToken.setValue(Authorization);
 							this.token = Authorization;
+							defaultUserInfo.userId=userCode
 						} else {
 							ElMessage.error(msg);
 						}
@@ -92,10 +96,10 @@ export const useUserStore = defineStore('user', {
 			return new Promise((resolve, reject) => {
 				getUserInfo()
 					.then((res) => {
-						const { code, data, msg } = res;
-						console.log('getUserInfo', res);
+						const { status, data, msg } = res;
+
 						this.userInfo = data;
-						if (code === 200) {
+						if (status === 200) {
 							resolve(data);
 						} else {
 							reject(msg);
@@ -116,7 +120,9 @@ const defaultUserInfo = {
 	adCode: '',
 	adBjCode: '',
 	userName: '',
+	userId:'',
 	authBtnList: [],
+	authMenuList:[]
 };
 export const useUserInfo = defineStore('userInfo', {
 	state: () => ({
@@ -128,24 +134,29 @@ export const useUserInfo = defineStore('userInfo', {
 			if (Session.get('userInfo')) {
 				this.userInfos = Session.get('userInfo');
 			} else {
-				const userInfos = await this.getApiUserInfo();
+				if(defaultUserInfo.userId==null){
+					ElMessage.error('登录失败')
+				}
+				const userInfos = await this.getApiUserInfo(defaultUserInfo.userId);
 				this.userInfos = userInfos;
 			}
 			useUserStore().setUserInfo(this.userInfos);
 		},
-		async getApiUserInfo() {
+		async getApiUserInfo(userId) {
 			return new Promise((resolve) => {
-				getUserInfo().then((res) => {
-					const { code, data, msg } = res;
+				getUserInfo(userId).then((res) => {
+					const { status, data, msg } = res;
+					let info =JSON.parse(data.replaceAll("\\",""))
 					let defaultRoles = ['admin'];
 					let defaultAuthBtnList = ['btn.add', 'btn.del', 'btn.edit', 'btn.link'];
 					const userInfos = {
 						time: new Date().getTime(),
-						photo: 'https://img2.baidu.com/it/u=1978192862,2048448374&fm=253&fmt=auto&app=138&f=JPEG?w=504&h=500',
-						roles: defaultRoles,
-						userName: data.userName,
+						photo:info.img?info.img: 'https://img2.baidu.com/it/u=1978192862,2048448374&fm=253&fmt=auto&app=138&f=JPEG?w=504&h=500',
+						roles: info.roles?info.roles:'common',
+						userName:info.userName?info.userName: "admin",
 						authBtnList: defaultAuthBtnList,
-						...data,
+						authMenuList: info.menuList,
+						...info,
 					};
 					Session.set('userInfo', userInfos);
 					resolve(userInfos);

@@ -15,8 +15,8 @@ export const useSettingStore = defineStore('setting', {
 				useUserApi()
 					.getUserAuth()
 					.then((res) => {
-						const { code, data, msg } = res;
-						if (code === 200) {
+						const { status, data, msg } = res;
+						if (status === 200) {
 							const { signature } = data;
 							this.secretKey = signature;
 							CryptoUtils.setCryptoSecretKey(signature);

@@ -1,5 +1,5 @@
 const ExampleRoutes = [
-	{
+	/*{
 		path: '/examples',
 		name: 'Example',
 		component: () => import('/@/layout/routerView/parent.vue'),
@@ -220,7 +220,7 @@ const ExampleRoutes = [
 				],
 			},
 		],
-	},
+	},*/
 ];
 
 export default ExampleRoutes;

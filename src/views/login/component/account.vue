@@ -1,7 +1,7 @@
 <template>
 	<el-form size="large" class="login-content-form">
 		<el-form-item class="login-animation1">
-			<el-input text placeholder="用户名 admin 或不输均为 common" v-model="state.ruleForm.userName" clearable autocomplete="off">
+			<el-input text placeholder="用户名 admin 或不输均为 common" v-model="state.ruleForm.userId" clearable autocomplete="off">
 				<template #prefix>
 					<el-icon class="el-input__icon"><ele-User /></el-icon>
 				</template>
@@ -65,8 +65,8 @@ const router = useRouter();
 const state = reactive({
 	isShowPassword: false,
 	ruleForm: {
-		userName: '21admin',
-		password: 'dsyf905',
+		userId: 'zs',
+		password: '123456',
 		code: '1234',
 	},
 	loading: {
@@ -81,28 +81,25 @@ const currentTime = computed(() => {
 // 登录
 const onSignIn = async () => {
 	await useUserStore().signIn({
-		userCode: state.ruleForm.userName,
-		password: RSAUtils.encrypt(state.ruleForm.password),
+		userCode: state.ruleForm.userId,
+		/*password: RSAUtils.encrypt(state.ruleForm.password),*/
+    password: state.ruleForm.password
 	});
 	state.loading.signIn = true;
 	// 存储 token 到浏览器缓存
 	//Session.set('token', Math.random().toString(36).substr(0));
 	// 模拟数据，对接接口时，记得删除多余代码及对应依赖的引入。用于 `/src/stores/userInfo.ts` 中不同用户登录判断（模拟数据）
-	Cookies.set('userName', 'admin');
+	Cookies.set('user', state.ruleForm.userId);
 	if (!themeConfig.value.isRequestRoutes) {
-    console.log('front')
 		// 前端控制路由，2、请注意执行顺序
 		const isNoPower = await initFrontEndControlRoutes();
 		signInSuccess(isNoPower);
 	} else {
-    console.log('end')
 		// 模拟后端控制路由，isRequestRoutes 为 true，则开启后端控制路由
 		// 添加完动态路由，再进行 router 跳转，否则可能报错 No match found for location with path "/"
-		const isNoPower = await initBackEndControlRoutes();
+		const isNoPower = await initBackEndControlRoutes(state.ruleForm.userId);
 		// 执行完 initBackEndControlRoutes，再执行 signInSuccess
-    console.log('1')
 		signInSuccess(isNoPower);
-    console.log('2')
 	}
 };
 // 登录成功后的跳转
@@ -111,6 +108,7 @@ const signInSuccess = (isNoPower) => {
 		ElMessage.warning('抱歉，您没有登录权限');
 		Session.clear();
 	} else {
+    console.log('login')
 		// 初始化登录成功时间问候语
 		let currentTimeInfo = currentTime.value;
 		// 登录成功，跳到转首页

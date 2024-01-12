@@ -8,10 +8,11 @@ import { defAxios as request } from '@/utils/http';
  */
 export function useUserApi() {
 	return {
-		getUserInfo: () => {
+		getUserInfo: (userId) => {
 			return request({
 				url: '/user/info',
 				method: 'post',
+				data: { userId}
 			});
 		},
 		getUserAuth: () => {

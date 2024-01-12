@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { useUserApi } from '@/api/user';
 import { useRoute } from 'vue-router';
-
+import {Session} from "@/utils";
 export const useMenuStore = defineStore('Menu', {
 	state: () => ({
 		// 路由数据
@@ -17,8 +17,7 @@ export const useMenuStore = defineStore('Menu', {
 					.getUserMenus()
 					.then((res) => {
 						const { code, data, msg } = res;
-						const result = this.parseAsyncRoutes(data.router);
-						console.log('store-menu', { result, data });
+						const result = this.parseAsyncRoutes(JSON.parse(data.routes.replaceAll("\\","")));
 						resolve(result);
 					});
 			});
@@ -27,19 +26,32 @@ export const useMenuStore = defineStore('Menu', {
 			const route = useRoute();
 			return this.routeParamsMap[route.path];
 		},
+
 		parseAsyncRoutes(routerMap, parentRoute) {
+			function parseHide(name) {
+				const info=Session.get('userInfo');
+				let flag = true
+				const {menuAuth} = info
+				for (let menu of menuAuth) {
+					if(menu === name){
+						flag=false
+					}
+				}
+				return flag
+			}
+
 			return routerMap.map((route) => {
 				const { meta, children } = route;
 				const newMeta = {
 					title: meta.title,
-					isLink: meta.link,
-					isHide: meta.invisible,
+					isLink: meta.isLink,
+					isHide: parseHide(route.name),
 					isKeepAlive: false,
 					isAffix: false,
 					isIframe: false,
 					icon: meta.icon ? `rk-${meta.icon}` : '',
-					roles: ['admin'],
-					authority: meta.authority,
+					roles: meta.roles,
+					authority: meta.authority?meta.authority:"",
 					routerParams: meta.routerParams || '',
 				};
 				if (meta.iframeSrc) {
@@ -58,6 +70,7 @@ export const useMenuStore = defineStore('Menu', {
 				} else {
 					component = component.slice(1);
 				}
+				console.log(component)
 				const newRoute = {
 					path: newPath,
 					name: route.name,
@@ -75,7 +88,7 @@ export const useMenuStore = defineStore('Menu', {
 					newRoute['query'] = query;
 					this.routeParamsMap[newPath] = query;
 				}
-				if (children && children != null && children.length) {
+				if (children && children.length) {
 					newRoute['children'] = this.parseAsyncRoutes(children, newRoute);
 				}
 				return newRoute;
@@ -83,7 +96,6 @@ export const useMenuStore = defineStore('Menu', {
 		},
 	},
 });
-
 // export const parseAsyncRoutes = (routerMap, parentRoute) => {
 // 	return routerMap.map((route) => {
 // 		const { meta, children } = route;

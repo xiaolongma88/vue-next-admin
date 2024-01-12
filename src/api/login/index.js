@@ -8,10 +8,10 @@ import { defAxios as request } from '@/utils/http';
  */
 export function useLoginApi() {
 	return {
-		login: (userCode, password) => {
+		login: (userId, password) => {
 			return request({
 				url: '/login',
-				data: { userCode, password },
+				data: { userId, password },
 				method: 'post',
 				headers: { isToken: false },
 			});

@@ -44,7 +44,7 @@ export const dynamicRoutes = [
 					icon: 'iconfont icon-shouye',
 				},
 			},
-			{
+			/*{
 				path: '/system-local',
 				name: 'system-local',
 				component: () => import('/@/layout/routerView/parent.vue'),
@@ -121,7 +121,7 @@ export const dynamicRoutes = [
 						},
 					},
 				],
-			},
+			},*/
 			...BaseRoute,
 		],
 	},

@@ -63,6 +63,7 @@ const state = reactive({
 
 // 获取父级菜单数据
 const menuLists = computed(() => {
+  console .log(props.menuList)
 	return props.menuList;
 });
 // 获取布局配置信息

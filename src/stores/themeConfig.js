@@ -104,7 +104,7 @@ export const useThemeConfig = defineStore('themeConfig', {
 			// 是否开启水印
 			isWartermark: true,
 			// 水印文案
-			wartermarkText: 'iv-next-admin',
+			wartermarkText: '',
 
 			/**
 			 * 其它设置

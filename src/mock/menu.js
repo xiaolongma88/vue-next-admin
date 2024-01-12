@@ -1,118 +1,55 @@
 import Mock from 'mockjs'
 Mock.mock('/api/user/getUserRouterPermission', 'post', (req) => {
     return {
-        code: 200,
+        status: 200,
         msg: '成功',
         data: {
-            router:[
-            {
-                "path": "/home",
-                "name": "home",
-                "component": "home/index",
-                "meta": {
-                    "title": "message.router.home",
-                    "isLink": "",
-                    "isHide": false,
-                    "isKeepAlive": true,
-                    "isAffix": true,
-                    "isIframe": false,
-                    "roles": ["admin", "common"],
-                    "icon": "iconfont icon-shouye"
-                }
-            },
-            {
-                "path": "/system",
-                "name": "system",
-                "component": "layout/routerView/parent",
-                "redirect": "/system/menu",
-                "meta": {
-                    "title": "message.router.system",
-                    "isLink": "",
-                    "isHide": false,
-                    "isKeepAlive": true,
-                    "isAffix": false,
-                    "isIframe": false,
-                    "roles": ["admin"],
-                    "icon": "iconfont icon-xitongshezhi"
-                },
-                "children": [
-                    {
-                        "path": "/system/menu",
-                        "name": "systemMenu",
-                        "component": "system/menu/index",
-                        "meta": {
-                            "title": "message.router.systemMenu",
-                            "isLink": "",
-                            "isHide": false,
-                            "isKeepAlive": true,
-                            "isAffix": false,
-                            "isIframe": false,
-                            "roles": ["admin"],
-                            "icon": "iconfont icon-caidan"
-                        }
-                    },
-                    {
-                        "path": "/system/user",
-                        "name": "systemUser",
-                        "component": "system/user/index",
-                        "meta": {
-                            "title": "message.router.systemUser",
-                            "isLink": "",
-                            "isHide": false,
-                            "isKeepAlive": true,
-                            "isAffix": false,
-                            "isIframe": false,
-                            "roles": ["admin"],
-                            "icon": "iconfont icon-icon-"
-                        }
-                    }
-                ]
-            },
+            routes:[
             {
                 "path": "/limits",
                 "name": "limits",
                 "component": "layout/routerView/parent",
                 "redirect": "/limits/frontEnd",
                 "meta": {
-                    "title": "message.router.limits",
+                    "title": "权限管理",
                     "isLink": "",
                     "isHide": false,
                     "isKeepAlive": true,
                     "isAffix": false,
                     "isIframe": false,
-                    "roles": ["admin", "common"],
+                    "roles": ["admin"],
                     "icon": "iconfont icon-quanxian"
                 },
                 "children": [
                     {
-                        "path": "/limits/backEnd",
+                        "path": "/limits/frontEnd",
                         "name": "limitsBackEnd",
                         "component": "layout/routerView/parent",
+                        "redirect":"",
                         "meta": {
-                            "title": "message.router.limitsBackEnd",
+                            "title": "前端控制",
                             "isLink": "",
                             "isHide": false,
                             "isKeepAlive": true,
                             "isAffix": false,
                             "isIframe": false,
-                            "roles": ["admin", "common"]
+                            "roles": ["admin"]
                         },
-                        "children": [
-                            {
-                                "path": "/limits/backEnd/page",
-                                "name": "limitsBackEndEndPage",
-                                "component": "limits/backEnd/page/index",
-                                "meta": {
-                                    "title": "message.router.limitsBackEndEndPage",
-                                    "isLink": "",
-                                    "isHide": false,
-                                    "isKeepAlive": true,
-                                    "isAffix": false,
-                                    "isIframe": false,
-                                    "roles": ["admin", "common"]
-                                }
-                            }
-                        ]
+                        "children":[]
+                    },
+                    {
+                        "path": "/limits/backEnd/page",
+                        "name": "limitsBackEndEndPage",
+                        "component": "limits/backEnd/page/index",
+                        "meta": {
+                            "title": "后端控制",
+                            "isLink": "",
+                            "isHide": false,
+                            "isKeepAlive": true,
+                            "isAffix": false,
+                            "isIframe": false,
+                            "roles": ["admin"]
+                        }
                     }
                 ]
             },
@@ -122,7 +59,7 @@ Mock.mock('/api/user/getUserRouterPermission', 'post', (req) => {
                 "component": "layout/routerView/parent",
                 "redirect": "/menu/menu1",
                 "meta": {
-                    "title": "message.router.menu",
+                    "title": "菜单嵌套",
                     "isLink": "",
                     "isHide": false,
                     "isKeepAlive": true,
@@ -138,7 +75,7 @@ Mock.mock('/api/user/getUserRouterPermission', 'post', (req) => {
                         "component": "layout/routerView/parent",
                         "redirect": "/menu/menu1/menu11",
                         "meta": {
-                            "title": "message.router.menu1",
+                            "title": "菜单1",
                             "isLink": "",
                             "isHide": false,
                             "isKeepAlive": true,
@@ -153,7 +90,7 @@ Mock.mock('/api/user/getUserRouterPermission', 'post', (req) => {
                                 "name": "menu11",
                                 "component": "menu/menu1/menu11/index",
                                 "meta": {
-                                    "title": "message.router.menu11",
+                                    "title": "菜单11",
                                     "isLink": "",
                                     "isHide": false,
                                     "isKeepAlive": true,
@@ -169,7 +106,7 @@ Mock.mock('/api/user/getUserRouterPermission', 'post', (req) => {
                                 "component": "layout/routerView/parent",
                                 "redirect": "/menu/menu1/menu12/menu121",
                                 "meta": {
-                                    "title": "message.router.menu12",
+                                    "title": "菜单12",
                                     "isLink": "",
                                     "isHide": false,
                                     "isKeepAlive": true,
@@ -184,7 +121,7 @@ Mock.mock('/api/user/getUserRouterPermission', 'post', (req) => {
                                         "name": "menu121",
                                         "component": "menu/menu1/menu12/menu121/index",
                                         "meta": {
-                                            "title": "message.router.menu121",
+                                            "title": "菜单121",
                                             "isLink": "",
                                             "isHide": false,
                                             "isKeepAlive": true,
@@ -199,7 +136,7 @@ Mock.mock('/api/user/getUserRouterPermission', 'post', (req) => {
                                         "name": "menu122",
                                         "component": "menu/menu1/menu12/menu122/index",
                                         "meta": {
-                                            "title": "message.router.menu122",
+                                            "title": "菜单122",
                                             "isLink": "",
                                             "isHide": false,
                                             "isKeepAlive": true,
@@ -216,7 +153,7 @@ Mock.mock('/api/user/getUserRouterPermission', 'post', (req) => {
                                 "name": "menu13",
                                 "component": "menu/menu1/menu13/index",
                                 "meta": {
-                                    "title": "message.router.menu13",
+                                    "title": "菜单13",
                                     "isLink": "",
                                     "isHide": false,
                                     "isKeepAlive": true,
@@ -233,7 +170,7 @@ Mock.mock('/api/user/getUserRouterPermission', 'post', (req) => {
                         "name": "menu2",
                         "component": "menu/menu2/index",
                         "meta": {
-                            "title": "message.router.menu2",
+                            "title": "菜单2",
                             "isLink": "",
                             "isHide": false,
                             "isKeepAlive": true,
@@ -251,7 +188,7 @@ Mock.mock('/api/user/getUserRouterPermission', 'post', (req) => {
                 "component": "layout/routerView/parent",
                 "redirect": "/fun/tagsView",
                 "meta": {
-                    "title": "message.router.funIndex",
+                    "title": "功能",
                     "isLink": "",
                     "isHide": false,
                     "isKeepAlive": true,
@@ -266,7 +203,7 @@ Mock.mock('/api/user/getUserRouterPermission', 'post', (req) => {
                         "name": "funTagsView",
                         "component": "fun/tagsView/index",
                         "meta": {
-                            "title": "message.router.funTagsView",
+                            "title": "tagsView",
                             "isLink": "",
                             "isHide": false,
                             "isKeepAlive": true,
@@ -283,7 +220,7 @@ Mock.mock('/api/user/getUserRouterPermission', 'post', (req) => {
                 "name": "chartIndex",
                 "component": "chart/index",
                 "meta": {
-                    "title": "message.router.chartIndex",
+                    "title": "大数据图表",
                     "isLink": "",
                     "isHide": false,
                     "isKeepAlive": true,
@@ -291,14 +228,15 @@ Mock.mock('/api/user/getUserRouterPermission', 'post', (req) => {
                     "isIframe": false,
                     "roles": ["admin", "common"],
                     "icon": "iconfont icon-ico_shuju"
-                }
+                },
+                "children":[]
             },
             {
                 "path": "/personal",
                 "name": "personal",
                 "component": "personal/index",
                 "meta": {
-                    "title": "message.router.personal",
+                    "title": "个人中心",
                     "isLink": "",
                     "isHide": false,
                     "isKeepAlive": true,
@@ -313,7 +251,7 @@ Mock.mock('/api/user/getUserRouterPermission', 'post', (req) => {
                 "name": "tools",
                 "component": "tools/index",
                 "meta": {
-                    "title": "message.router.tools",
+                    "title": "工具类集合",
                     "isLink": "",
                     "isHide": false,
                     "isKeepAlive": true,
@@ -321,14 +259,15 @@ Mock.mock('/api/user/getUserRouterPermission', 'post', (req) => {
                     "isIframe": false,
                     "roles": ["admin", "common"],
                     "icon": "iconfont icon-gongju"
-                }
+                },
+                "children":[]
             },
             {
                 "path": "/link",
                 "name": "layoutLinkView",
                 "component": "layout/routerView/link",
                 "meta": {
-                    "title": "message.router.layoutLinkView",
+                    "title": "外链",
                     "isLink": "https://element-plus.gitee.io/#/zh-CN/component/installation",
                     "isHide": false,
                     "isKeepAlive": false,
@@ -336,14 +275,15 @@ Mock.mock('/api/user/getUserRouterPermission', 'post', (req) => {
                     "isIframe": false,
                     "roles": ["admin"],
                     "icon": "iconfont icon-caozuo-wailian"
-                }
+                },
+                "children":[]
             },
             {
                 "path": "/iframes",
                 "name": "layoutIfameView",
                 "component": "layout/routerView/iframe",
                 "meta": {
-                    "title": "message.router.layoutIfameView",
+                    "title": "内嵌IfameView",
                     "isLink": "https://gitee.com/lyt-top/vue-next-admin",
                     "isHide": false,
                     "isKeepAlive": true,
@@ -351,7 +291,8 @@ Mock.mock('/api/user/getUserRouterPermission', 'post', (req) => {
                     "isIframe": true,
                     "roles": ["admin"],
                     "icon": "iconfont icon-neiqianshujuchucun"
-                }
+                },
+                "children":[]
             }
         ]}
     }

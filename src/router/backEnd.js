@@ -32,7 +32,7 @@ const dynamicViewsModules = Object.assign({}, { ...layouModules }, { ...viewsMod
  * @method setAddRoute 添加动态路由
  * @method setFilterMenuAndCacheTagsViewRoutes 设置路由到 pinia routesList 中（已处理成多级嵌套路由）及缓存多级嵌套数组处理后的一维数组
  */
-export async function initBackEndControlRoutes() {
+export async function initBackEndControlRoutes(userId) {
 	// 界面 loading 动画开始执行
 	if (window.nextLoading === undefined) NextLoading.start();
 	// 无 token 停止执行下一步
@@ -44,7 +44,7 @@ export async function initBackEndControlRoutes() {
 	// 设置用户信息
 	await useUserInfo().setUserInfos();
 	// 获取路由菜单数据
-	const resData = await getBackEndControlRoutes();
+	const resData = await getBackEndControlRoutes(userId);
 	// 无登录权限时，添加判断
 	// https://gitee.com/lyt-top/vue-next-admin/issues/I64HVO
 	if (resData.length <= 0) return Promise.resolve(true);
@@ -53,6 +53,7 @@ export async function initBackEndControlRoutes() {
 	// 处理路由（component），替换 dynamicRoutes（/@/router/route）第一个顶级 children 的路由
 	dynamicRoutes[0].children = [...dynamicRoutes[0].children, ...(await backEndComponent(resData))];
 	// 添加动态路由
+
 	await setAddRoute();
 	// 设置路由到 pinia routesList 中（已处理成多级嵌套路由）及缓存多级嵌套数组处理后的一维数组
 	setFilterMenuAndCacheTagsViewRoutes();
@@ -108,8 +109,8 @@ export async function setAddRoute() {
  * @description isRequestRoutes 为 true，则开启后端控制路由
  * @returns 返回后端路由菜单数据
  */
-export function getBackEndControlRoutes() {
-	return useMenuStore().getUserMenus();
+export function getBackEndControlRoutes(userId) {
+	return useMenuStore().getUserMenus(userId);
 	/*// 模拟 admin 与 test
 	const stores = useUserInfo(pinia);
 	const { userInfos } = storeToRefs(stores);

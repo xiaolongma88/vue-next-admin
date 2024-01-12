@@ -41,6 +41,7 @@ const viteConfig = defineConfig((mode) => {
 					changeOrigin: true,
 					rewrite: (path) => path.replace(/^\/gitee/, ''),
 				},
+				//
 				[env.VITE_API_URL]: {
 					target: env.VITE_API_PROXY,
 					changeOrigin: true,
