@@ -30,14 +30,12 @@ export const fileType = {
     xls: "application/vnd.ms-excel",
     xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     xml: 'text/xml',
-    js: 'text/javascript',
     json: 'application/json',
     jsonld: 'application/ld+json',
     jar: 'application/java-archive',
     htm: 'text/html',
     html: 'text/html',
     css: 'text/css',
-    avi: 'video/x-msvideo'
 }
 /**
  * 文件下载

@@ -48,7 +48,7 @@ export const useThemeConfig = defineStore('themeConfig', {
 			 * 分栏设置
 			 */
 			// 默认分栏菜单背景颜色
-			columnsMenuBar: '#545c64',
+			columnsMenuBar: '#fff',
 			// 默认分栏菜单字体颜色
 			columnsMenuBarColor: '#e6e6e6',
 			// 是否开启分栏菜单背景颜色渐变
@@ -78,7 +78,7 @@ export const useThemeConfig = defineStore('themeConfig', {
 			 * 界面显示
 			 */
 			// 是否开启侧边栏 Logo
-			isShowLogo: false,
+			isShowLogo: true,
 			// 初始化变量，用于 el-scrollbar 的高度更新，请勿删除
 			isShowLogoChange: false,
 			// 是否开启 Breadcrumb，强制经典、横向布局不显示
@@ -137,11 +137,11 @@ export const useThemeConfig = defineStore('themeConfig', {
 			 * 全局网站标题 / 副标题
 			 */
 			// 网站主标题（菜单导航、浏览器当前网页标题）
-			globalTitle: 'iv-next-admin',
+			globalTitle: '资产管理系统',
 			// 网站副标题（登录页顶部文字）
-			globalViceTitle: 'IvNextAdmin',
+			globalViceTitle: '资产管理系统',
 			// 网站副标题（登录页顶部文字）
-			globalViceTitleMsg: 'IvNextAdmin框架',
+			globalViceTitleMsg: '资产管理系统',
 			// 默认初始语言，可选值"<zh-cn|en|zh-tw>"，默认 zh-cn
 			globalI18n: 'zh-cn',
 		},

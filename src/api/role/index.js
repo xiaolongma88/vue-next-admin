@@ -2,6 +2,28 @@ import { defAxios as request } from '@/utils/http';
 
 export function useRoleApi() {
 	return {
+		getAllRole(){
+			return request({
+				url:'/all_role',
+				method:'get'
+			})
+		},
+		deleteOne(roleId){
+			return request({
+				url:'/del_role',
+				method:'post',
+				data:{
+					id:roleId
+				}
+			})
+		},
+		addRole(params) {
+			return request({
+				url: '/role/add_role',
+				method: 'post',
+				data: params,
+			});
+		},
 		getRoleInfo(params) {
 			return request({
 				url: '/role/getRoleInfo',
@@ -31,8 +53,9 @@ export function useRoleApi() {
 			});
 		},
 		roleSave(params) {
+			console.log(params)
 			return request({
-				url: '/role/saveRole',
+				url: '/edit_role',
 				method: 'post',
 				data: params,
 			});

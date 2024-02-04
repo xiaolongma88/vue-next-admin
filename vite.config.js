@@ -50,6 +50,11 @@ const viteConfig = defineConfig((mode) => {
 					// 重写的请求路径
 					rewrite: (path) => path.replace(new RegExp(`^${env.VITE_API_URL}`), ''),
 				},
+				'/echarts.apache':{
+					target: 'https://echarts.apache.org',
+					ws: true,
+					changeOrigin: true,
+				}
 			},
 		},
 		build: {

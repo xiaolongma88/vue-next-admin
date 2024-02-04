@@ -8,6 +8,7 @@ export const useSettingStore = defineStore('setting', {
 		secretKey: '',
 		// 是否开启加密
 		encryptOpen: false,
+		added:false
 	}),
 	actions: {
 		setSecretKey() {
@@ -30,5 +31,8 @@ export const useSettingStore = defineStore('setting', {
 					});
 			});
 		},
+		setAdded(date){
+			this.added = date
+		}
 	},
 });

@@ -2,7 +2,7 @@
 	<div class="layout-footer pb15">
 		<div class="layout-footer-warp">
 			<div>iv-next-admin，Made by lyt with ❤️</div>
-			<div class="mt5">深圳市 xxx 公司版权所有</div>
+			<div class="mt5">xxx 公司版权所有</div>
 		</div>
 	</div>
 </template>

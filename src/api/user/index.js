@@ -27,5 +27,46 @@ export function useUserApi() {
 				method: 'post',
 			});
 		},
+		getAllUser:()=>{
+			return request({
+				url:'/all_user',
+				method:'get'
+			})
+		},
+		addUser:(userInfo)=>{
+			return request({
+				url:'/add_user',
+				method:'post',
+				data:userInfo
+			})
+		},
+		deleteOne:(userId)=>{
+			return request({
+				url:'/del_user',
+				method:'post',
+				data: {
+					"userId":userId
+				}
+			})
+		},
+		editUser:(userInfo)=>{
+			return request({
+				url:'/edit_user',
+				method:'post',
+				data:userInfo
+			})
+		},
+		test1: () => {
+			return request({
+				url: 'https://echarts.apache.org/examples/data/asset/data/life-expectancy-table.json',
+				method: 'get',
+			});
+		},
+		test2: () => {
+			return request({
+				url: 'https://echarts.apache.org/examples/data/asset/data/life-expectancy-table.json',
+				method: 'get',
+			});
+		},
 	};
 }

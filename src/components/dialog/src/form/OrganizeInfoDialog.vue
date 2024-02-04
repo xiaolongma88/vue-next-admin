@@ -40,7 +40,7 @@
 
 <script setup name="ReserveProjDialog">
 import XEUtils from 'xe-utils';
-import OrgainzationInforPanel from './panels/OrgainzationInforPanel.vue';
+//import OrgainzationInforPanel from './panels/OrgainzationInforPanel.vue';
 import { FILL_FORM_TYPE_CONFIG } from '@/components/designer/cfg/rk-form-conf.js';
 import { ref, defineAsyncComponent } from 'vue';
 

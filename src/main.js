@@ -26,6 +26,7 @@ import 'vxe-table/lib/style.css';
 // 引入样式
 import '@/styles/index.scss';
 import '@/mock/mock.js'
+
 const app = createApp(App);
 setupComponents(app);
 directive(app);
@@ -36,6 +37,7 @@ app.use(ProcessDesigner);
 app.use(VxeTablePlugins);
 // 添加ElementPlus
 app.use(ElementPlus, { size: 'default', locale: zhCn });
+
 // 添加VForm表单设计器
 app.use(VForm3);
 app.use(pinia).use(router).mount('#app');
