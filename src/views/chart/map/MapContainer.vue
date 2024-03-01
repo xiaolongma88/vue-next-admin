@@ -2,10 +2,11 @@
 import {defineAsyncComponent, onMounted, onUnmounted, reactive, watch} from "vue";
 import AMapLoader from "@amap/amap-jsapi-loader";
 import {shallowRef} from '@vue/reactivity'
+import {useRouter} from "vue-router";
 
-defineAsyncComponent(() => import('/src/views/chart/map/dialog.vue'));
 
-
+const router = useRouter();
+const detail = ()=>import('./detail.vue')
 let map = shallowRef(null);
 const state = reactive({
   options: {
@@ -17,6 +18,7 @@ const state = reactive({
       img: "http://www.cnjnjg.com/uploadfile/2023/0521/20230521092637273.jpg",
       status:1,
       value:199999,
+      id:'GS123220200101123',
       assetName:'龙奥大厦',
       assetAddr:'济南市历下区龙鼎大道1号',
       position:[117.120168,36.650094],
@@ -26,6 +28,7 @@ const state = reactive({
       img: "https://pcdn.huanyule.com/public/uploads/202001/16/A7XIWYGMSP.jpg",
       status:1,
       value:199999,
+      id:'GS1232202001011235',
       assetName:'奥体中心体育馆',
       assetAddr:'济南市历下区经十东路',
       position:[117.120308,36.656973],
@@ -35,6 +38,7 @@ const state = reactive({
       img:'https://pic4.ajkimg.com/display/xinfang/7126f4caa577b5c1a227fc4687e92548/412x297x50c@2x.jpg?t=5',
       status:1,
       value:199999,
+      id:'GS1232202001011236',
       assetName:'凤凰国际北区8号楼',
       assetAddr:'济南市历城区华奥路与椒山路交叉口西南200米',
       position: [117.162133,36.653077],
@@ -44,6 +48,7 @@ const state = reactive({
       img:'https://pic4.ajkimg.com/display/xinfang/7e753af31a37d72e6391dde6b77c3aaa/500x500c.jpg?t=1',
       assetName:'济南龙奥公寓',
       assetAddr:'济南市历城区龙奥北路海信龙奥九号4号楼',
+      id:'GS1232202001011237',
       status: 1,
       value:199999,
       position:[117.13791,36.654457],
@@ -53,6 +58,7 @@ const state = reactive({
       img:'https://pic1.ajkimg.com/display/ajk/e6faf2c70fe7af46373de55a5a1210fd/800x600.jpg',
       assetName:'东城逸家逸秀园2区4号楼',
       assetAddr:'济南市历城区舜义路1069号',
+      id:'GS1232202001011238',
       status: 1,
       value:199999,
       position:[117.136113,36.652092],
@@ -62,6 +68,7 @@ const state = reactive({
       img:'https://store.is.autonavi.com/showpic/c8898e6d55cca2c0137daba5406d18f7?type=pic',
       assetName:'城投济南环贸中心',
       assetAddr:'济南市历下区高新经十路与舜义路交汇处东南侧',
+      id:'GS1232202001011239',
       status: 1,
       value:199999,
       position:[117.135223,36.65774],
@@ -71,6 +78,7 @@ const state = reactive({
       img:'https://store.is.autonavi.com/showpic/001256b0ce1120163940bc65ddbe85d7?type=pic',
       assetName:'万科金域国际天泰家园',
       assetAddr:'济南市历下区经十东路与舜华路交汇处',
+      id:'GS1232202001011240',
       status: 1,
       value:199999,
       position:[117.13771,36.662099],
@@ -80,6 +88,7 @@ const state = reactive({
       img:'https://store.is.autonavi.com/showpic/1d58380ce823596c1ae57d7c9d8a9658',
       assetName:'济高控股大厦',
       assetAddr:'济南市历城区舜泰路与舜泰中路交叉口东南40米',
+      id:'GS1232202001011241',
       status: 1,
       value:199999,
       position:[117.14464,36.663764],
@@ -98,6 +107,7 @@ const state = reactive({
 
 
 onMounted(() => {
+  router.addRoute({path: '/chart/map/detail', component: detail})
   AMapLoader.load({
     key: "ea71a4ff34d1b73237b49c212a04c8a7", // 申请好的Web端开发者Key，首次调用 load 时必填
     version: "", // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
@@ -140,6 +150,7 @@ const setMarker=()=>{
     const marker = new AMap.Marker({
       position: new AMap.LngLat(item.position[0],item.position[1]),
     });
+    marker.on('click', clickHandler);
     state.markerList.push(marker)
   }
   state.map.add(state.markerList)
@@ -168,12 +179,20 @@ const setAreas=(buildingLayer)=>{
 
 }
 const clickHandler = (e)=> {
-  alert('您在[ '+e.lnglat.getLng()+','+e.lnglat.getLat()+' ]的位置点击了地图！');
+  const position = [e.target.w.position.lng,e.target.w.position.lat]
+  let card = {}
+  for (const item of state.cardList) {
+    for(let i =0;i<position.length;i++){
+      if(position[i]===item.position[i]){
+        card = item;
+      }
+    }
+  }
+  router.push({path: '/chart/map/detail', query: {id: card.id}});
 };
 const mapMove=()=>{
   state.showInfo = false
 }
-
 const cardClick=(card)=>{
   state.focusOn = card.position
   state.showInfo = true
@@ -194,13 +213,14 @@ watch(
 
 onUnmounted(() => {
   map?.destroy();
+
 });
 </script>
 
 <template>
   <div id="container"></div>
   <div class="floating-cards" v-if="!state.showInfo" :key="state.refKeyTwo">
-    <el-scrollbar height="790px" >
+    <el-scrollbar height="800px" >
       <p v-for="(item, index) in state.cardList" :key="item.assetName">
         <el-card :body-style="{ padding: '0' }" class="card" @click="cardClick(item)">
           <div class="card-top">
@@ -242,7 +262,7 @@ onUnmounted(() => {
 <style scoped>
 #container {
   width: 100%;
-  height: 800px;
+  height: 100%;
 }
 .floating-cards {
   position: absolute;

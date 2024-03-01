@@ -316,9 +316,14 @@ const state = reactive({
 const scroll = ({ scrollTop }) => {
   value.value = scrollTop
 }
-const inputSlider = () => {
+const inputSlider = async () => {
   let value = 0;
   setInterval(()=>{
+    try {
+
+    } catch (e){
+
+    }
     value+=1
     if(value>(max.value+100)){
       value=0
@@ -407,18 +412,6 @@ const initChartsLeftOne = ()=>{
       }
     ]
   };
-  /*setInterval(function () {
-    gaugeData[0].value = +(Math.random() * 100).toFixed(2);
-    gaugeData[1].value = +(Math.random() * 100).toFixed(2);
-    gaugeData[2].value = +(Math.random() * 100).toFixed(2);
-    myChart.setOption({
-      series: [
-        {
-          data: gaugeData
-        }
-      ]
-    });
-  }, 2000);*/
   myChart.setOption(option);
   state.myCharts.push(myChart);
 }
@@ -699,9 +692,7 @@ onMounted(() => {
 	initChartsInvestment();
 	initEchartsResize();
   max.value = innerRef.value!.clientHeight - 380;
-  setTimeout(()=>{
-    inputSlider()
-  },10)
+  inputSlider()
 });
 // 由于页面缓存原因，keep-alive
 onActivated(() => {

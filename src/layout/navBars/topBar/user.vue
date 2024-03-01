@@ -45,9 +45,9 @@
 			<template #dropdown>
 				<el-dropdown-menu>
 					<el-dropdown-item command="/home">首页</el-dropdown-item>
-					<el-dropdown-item command="wareHouse">代码仓库</el-dropdown-item>
+<!--					<el-dropdown-item command="wareHouse">代码仓库</el-dropdown-item>
 					<el-dropdown-item command="/404">404</el-dropdown-item>
-					<el-dropdown-item command="/401">401</el-dropdown-item>
+					<el-dropdown-item command="/401">401</el-dropdown-item>-->
 					<el-dropdown-item divided command="logOut">退出登录</el-dropdown-item>
 				</el-dropdown-menu>
 			</template>

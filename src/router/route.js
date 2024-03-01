@@ -24,12 +24,12 @@ export const dynamicRoutes = [
 		path: '/',
 		name: '/',
 		component: () => import('/@/layout/index.vue'),
-		redirect: '/home',
+		redirect: '/chart/stores',
 		meta: {
 			isKeepAlive: true,
 		},
 		children: [
-			{
+			/*{
 				path: '/home',
 				name: 'home',
 				component: () => import('/@/views/home/index.vue'),
@@ -43,7 +43,7 @@ export const dynamicRoutes = [
 					roles: ['admin', 'common'],
 					icon: 'iconfont icon-shouye',
 				},
-			},
+			},*/
 			...BaseRoute,
 		],
 	},

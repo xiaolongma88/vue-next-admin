@@ -50,13 +50,11 @@
 	</div>
 </template>
 
-<script setup lang="ts" name="chartIndex">
-import { defineAsyncComponent, reactive, onMounted, ref } from 'vue';
+<script setup lang="ts">
+import { reactive, onMounted, ref } from 'vue';
 import * as echarts from 'echarts';
-import {data1,data2} from './mock'
 
-// 引入组件
-defineAsyncComponent(() => import('/@/views/chart/stores/head.vue'));
+
 // 定义变量内容
 const chartsCenterOneRef = ref();
 const chartsCenterTwoRef = ref();
@@ -68,7 +66,7 @@ const state = reactive({
 	myCharts: [] ,
 });
 
-// 初始化中间图表1
+// 初始化
 const initChartsCenterOne = () => {
   const option = {
     title: [
@@ -526,8 +524,8 @@ const initChartsRightTwo = ()=>{
       ]
     },
     series: (function () {
-      var series = [];
-      for (var i = 1; i <= 28; i++) {
+      const series = [];
+      for (let i = 1; i <= 28; i++) {
         series.push({
           type: 'radar',
           symbol: 'none',
@@ -570,9 +568,7 @@ onMounted(() => {
 	initChartsRightOne()
   initChartsRightTwo();
 });
-// 由于页面缓存原因，keep-alive
 
-// 监听 pinia 中的 tagsview 开启全屏变化，重新 resize 图表，防止不出现/大小不变等
 </script>
 
 <style scoped lang="scss">

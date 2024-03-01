@@ -6,7 +6,7 @@ import { presetUno, presetAttributify, presetIcons } from 'unocss'
  * @returns {Array} 获取Unocss配置
  */
 export function configUnocss() {
-  return Unocss({
-    presets: [presetUno(), presetAttributify(), presetIcons()],
-  })
+    return Unocss({
+        presets: [presetUno(), presetAttributify(), presetIcons()],
+    })
 }

@@ -14,9 +14,7 @@ import 'virtual:svg-icons-register';
 // 引入VForm3
 import VForm3 from '@/../lib/vform/designer.umd.js';
 import '@/../lib/vform/designer.style.css';
-// 引入全局工作流
-import ProcessDesigner from './components/bpmn/package/designer/index';
-import './components/bpmn/package/theme/index.scss';
+
 // 引入全局组件配置
 import { setupComponents } from '@/components/index.js';
 // vxe-table表格
@@ -31,8 +29,7 @@ const app = createApp(App);
 setupComponents(app);
 directive(app);
 other.elSvg(app);
-// 配置工作流
-app.use(ProcessDesigner);
+
 // 添加vxe-table
 app.use(VxeTablePlugins);
 // 添加ElementPlus

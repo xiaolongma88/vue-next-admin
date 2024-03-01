@@ -52,11 +52,10 @@
 </template>
 
 <script setup lang="ts" name="chartIndex">
-import { defineAsyncComponent, reactive, onMounted, ref } from 'vue';
+import { reactive, onMounted, ref } from 'vue';
 import * as echarts from 'echarts';
-import {res} from './mock'
-// 引入组件
-defineAsyncComponent(() => import('/@/views/chart/stores/head.vue'));
+import {res} from './mock.js'
+
 // 定义变量内容
 const chartsCenterOneRef = ref();
 const chartsRightOneRef = ref();
@@ -491,7 +490,6 @@ const initChartsRightTwo = ()=>{
       }
     ]
   };
-
   const myChart = echarts.init(chartsRightTwoRef.value);
   myChart.setOption(option);
 }

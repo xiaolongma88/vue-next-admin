@@ -48,55 +48,55 @@ import { createStyleImportPlugin, VxeTableResolve } from 'vite-plugin-style-impo
  * @returns { Array } 插件配置信息
  */
 export function createVitePlugins(viteEnv, isBuild) {
-	const plugins = [
-		vue(),
-		vueJsx(),
-		vueSetupExtend(),
-		AutoImport({
-			dts: false,
-			imports: ['vue', 'vue-router'],
-		}),
-		// Components({
-		//   resolvers: [ElementPlusResolver()],
-		// }),
-		replace({
-			preventAssignment: true,
-			include: ['@/../lib/vform/designer.umd.js'],
-			values: {
-				'eval(': '[eval][0](',
-			},
-		}),
-		// svg
-		createSvgIconsPlugin({
-			// 指定需要缓存的图标文件夹(路径为存放所有svg图标的文件夹不单个svg图标)
-			iconDirs: [path.resolve(process.cwd(), 'src/assets/icons/svg')],
-			// 指定symbolId格式
-			symbolId: 'icon-[dir]-[name]',
-		}),
-		// vxe-table按需导入
-		createStyleImportPlugin({
-			resolves: [VxeTableResolve()],
-		}),
-	];
-	// 生产环境
-	if (isBuild) {
-		plugins.push(
-			visualizer({
-				open: false,
-				gzipSize: true,
-				brotliSize: true,
-			})
-		);
-		plugins.push(
-			viteCompression({
-				verbose: true,
-				disable: false, // 不禁用压缩
-				deleteOriginFile: false, // 压缩后是否删除原文件
-				threshold: 10240, // 压缩前最小文件大小
-				algorithm: 'gzip', // 压缩算法
-				ext: '.gz', // 文件类型
-			})
-		);
-	}
-	return plugins;
+    const plugins = [
+        vue(),
+        vueJsx(),
+        vueSetupExtend(),
+        AutoImport({
+            dts: false,
+            imports: ['vue', 'vue-router'],
+        }),
+        // Components({
+        //   resolvers: [ElementPlusResolver()],
+        // }),
+        replace({
+            preventAssignment: true,
+            include: ['@/../lib/vform/designer.umd.js'],
+            values: {
+                'eval(': '[eval][0](',
+            },
+        }),
+        // svg
+        createSvgIconsPlugin({
+            // 指定需要缓存的图标文件夹(路径为存放所有svg图标的文件夹不单个svg图标)
+            iconDirs: [path.resolve(process.cwd(), 'src/assets/icons/svg')],
+            // 指定symbolId格式
+            symbolId: 'icon-[dir]-[name]',
+        }),
+        // vxe-table按需导入
+        createStyleImportPlugin({
+            resolves: [VxeTableResolve()],
+        }),
+    ];
+    // 生产环境
+    if (isBuild) {
+        plugins.push(
+            visualizer({
+                open: false,
+                gzipSize: true,
+                brotliSize: true,
+            })
+        );
+        plugins.push(
+            viteCompression({
+                verbose: true,
+                disable: false, // 不禁用压缩
+                deleteOriginFile: false, // 压缩后是否删除原文件
+                threshold: 10240, // 压缩前最小文件大小
+                algorithm: 'gzip', // 压缩算法
+                ext: '.gz', // 文件类型
+            })
+        );
+    }
+    return plugins;
 }
